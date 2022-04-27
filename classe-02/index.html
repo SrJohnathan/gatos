@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:400,700,900');
+
+    * {
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .cinza {
+        color: #747373;
+    }
+    .list {
+        list-style: none;
+    }
+</style>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>WikiCat</h1>
+
+<ul class="list">
+    <li><b><a href="./">Home</a></b></li>
+    <li><b><a href="./?i=siames">Siamês</a></b></li>
+    <li><b><a href="./?i=persa">Persa</a></b></li>
+    <li><b><a href="./?i=maine">Maine Coon</a></b></li>
+    <li><b><a href="./?i=sph">Sphynx</a></b></li>
+
+</ul>
+
+<section id="content">
+
+
+</section>
+
+<a href="./">Volta para inicio</a>
+
+</body>
+
+<script>
+
+    async function loadPage(url) {
+        return await (await fetch(url)).text();
+    }
+
+    async function load(str) {
+        const contentDiv = document.getElementById("content");
+        contentDiv.innerHTML = ""
+        contentDiv.innerHTML = await loadPage(str);
+    }
+
+
+    (async () => {
+        const url = new URLSearchParams(window.location.search)
+        const index = url.get("i")
+         if (index === "siames") {
+            await load("content/siames.html")
+        } else if (index === "persa") {
+            await load("content/persa.html")
+        } else if (index === "maine") {
+            await load("content/maine.html")
+        } else if (index === "sph") {
+            await load("content/sph.html")
+        }else {
+            await load("content/home.html")
+        }
+    })()
+
+
+</script>
+
+</html>
